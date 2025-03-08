@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>С 8 Марта!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Lobster&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fad0c4, #a1c4fd);
+            background-size: 400% 400%;
+            animation: gradient 15s ease infinite;
+            font-family: 'Pacifico', cursive;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 50px auto;
+        }
+
+        h1 {
+            font-size: 4em;
+            color: #ff0066;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            animation: title 2s ease-in-out infinite;
+            margin: 20px 0;
+        }
+
+        .flowers {
+            position: relative;
+            height: 200px;
+            margin: 30px 0;
+        }
+
+        .flower {
+            position: absolute;
+            font-size: 50px;
+            animation: float 4s ease-in-out infinite;
+            z-index: 1;
+        }
+
+        .message {
+            font-size: 1.5em;
+            color: #333;
+            margin: 0 auto;
+            padding: 30px;
+            background: rgba(255,255,255,0.9);
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            transform: translateY(0);
+            animation: fadeIn 2s ease-out forwards;
+            position: relative;
+            z-index: 3;
+            line-height: 1.6;
+            margin-bottom: 40px;
+        }
+
+        .leaf {
+            position: fixed;
+            font-size: 25px;
+            color: #ff6699;
+            animation: fall linear infinite;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        @keyframes gradient {
+            0% {background-position: 0% 50%;}
+            50% {background-position: 100% 50%;}
+            100% {background-position: 0% 50%;}
+        }
+
+        @keyframes title {
+            0%, 100% {transform: scale(1); text-shadow: 0 0 20px #ff0066;}
+            50% {transform: scale(1.05); text-shadow: 0 0 30px #ff0066;}
+        }
+
+        @keyframes float {
+            0%, 100% {transform: translateY(0);}
+            50% {transform: translateY(-20px);}
+        }
+
+        @keyframes fadeIn {
+            from {opacity: 0; transform: translateY(30px);}
+            to {opacity: 1; transform: translateY(0);}
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .heart {
+            color: #ff0066;
+            animation: heartbeat 1.2s infinite;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% {transform: scale(1);}
+            50% {transform: scale(1.2);}
+        }
+
+        button {
+            padding: 15px 30px;
+            font-size: 1.2em;
+            background: #ff0066;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: 'Lobster', cursive;
+            position: relative;
+            z-index: 4;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px #ff0066;
+        }
+
+        .surprise-popup {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
+            z-index: 999;
+            box-shadow: 0 0 30px rgba(0,0,0,0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="leaves"></div>
+
+        <h1>С 8 Марта! <span class="heart">♥</span></h1>
+        
+        <div class="flowers">
+            <div class="flower" style="left: 10%;">🌸</div>
+            <div class="flower" style="left: 30%; animation-delay: -1s">🌺</div>
+            <div class="flower" style="left: 50%; animation-delay: -2s">🌼</div>
+            <div class="flower" style="left: 70%; animation-delay: -3s">🌷</div>
+            <div class="flower" style="left: 90%; animation-delay: -4s">🌻</div>
+        </div>
+
+        <div class="message">
+            <p>
+                Пусть новая весна вдохновляет Вас на счастливые перемены,<br>
+                приносит свежие идеи и большие цели!<br>
+                А вместе с тем приходят новые возможности и энергия<br>
+                для осуществления всего, что Вы пожелаете! 💖<br>
+                Будьте счастливы, любимы и окружены заботой! 💐✨
+            </p>
+            
+            <h2>Сюрприз!</h2>
+        </div>
+
+        <button onclick="showSurprise()">Открыть сюрприз!</button>
+    </div>
+
+    <script>
+        function createLeaves() {
+            const container = document.querySelector('.leaves');
+            for(let i = 0; i < 30; i++) {
+                const leaf = document.createElement('div');
+                leaf.className = 'leaf';
+                leaf.style.left = Math.random() * 100 + '%';
+                leaf.style.animationDuration = Math.random() * 3 + 2 + 's';
+                leaf.style.animationDelay = Math.random() * 5 + 's';
+                leaf.innerHTML = '❀';
+                container.appendChild(leaf);
+            }
+        }
+
+        function showSurprise() {
+            const surprise = document.createElement('div');
+            surprise.className = 'surprise-popup';
+            surprise.innerHTML = `
+                <h2 style="color: #ff0066">🎉 Сюрприз! 🎉</h2>
+                <p>Вы получаете виртуальный букет из 1000 роз! 🌹</p>
+                <img src="https://i.pinimg.com/originals/5c/7c/1d/5c7c1d0f26b8b0a61a358563a9b200e3.gif" 
+                    style="width: 200px; height: auto; margin: 15px 0;">
+                <button onclick="this.parentElement.remove()" style="margin-top: 15px;">Закрыть</button>
+            `;
+            document.body.appendChild(surprise);
+        }
+
+        window.onload = function() {
+            createLeaves();
+            
+            const colors = ['#ff0066', '#ff99cc', '#ff6699'];
+            setInterval(() => {
+                const star = document.createElement('div');
+                star.style.position = 'fixed';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.fontSize = Math.random() * 20 + 10 + 'px';
+                star.style.color = colors[Math.floor(Math.random() * colors.length)];
+                star.style.opacity = '0';
+                star.style.zIndex = '0';
+                star.innerHTML = '✦';
+                document.body.appendChild(star);
+                
+                anime({
+                    targets: star,
+                    opacity: [0, 1, 0],
+                    scale: [0, 1.5, 0],
+                    duration: 2000,
+                    easing: 'easeOutExpo',
+                    complete: () => star.remove()
+                });
+            }, 500);
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+</body>
+</html>
